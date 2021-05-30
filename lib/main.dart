@@ -67,125 +67,121 @@ class _AppBodyState extends State<AppBody> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        setState(() {
-                          if (blockOneColor != firstPlayerColor &&
-                              blockOneColor != secondPlayerColor &&
-                              !gameOver) {
-                            firstPlayerTurn
-                                ? blockOneColor = firstPlayerColor
-                                : blockOneColor = secondPlayerColor;
+                        setState(
+                          () {
+                            if (blockOneColor != firstPlayerColor &&
+                                blockOneColor != secondPlayerColor &&
+                                !gameOver) {
+                              firstPlayerTurn
+                                  ? blockOneColor = firstPlayerColor
+                                  : blockOneColor = secondPlayerColor;
 
-                            firstPlayerTurn
-                                ? ++numberOfFirstPlayerTappedBlocks
-                                : ++numberOfSecondPlayerTappedBlocks;
+                              firstPlayerTurn
+                                  ? ++numberOfFirstPlayerTappedBlocks
+                                  : ++numberOfSecondPlayerTappedBlocks;
 
-                            // checking if any player won
+                              // checking if any player won
 
-                            bool firstPlayerWon =
-                                checkIfPlayerWon(firstPlayerColor);
-                            bool secondPlayerWon =
-                                checkIfPlayerWon(secondPlayerColor);
+                              bool firstPlayerWon =
+                                  checkIfPlayerWon(firstPlayerColor);
+                              bool secondPlayerWon =
+                                  checkIfPlayerWon(secondPlayerColor);
 
-                            if (firstPlayerWon || secondPlayerWon) {
-                              topText = firstPlayerWon
-                                  ? firstPlayerWinsText
-                                  : secondPlayerWinsText;
-                              gameOver = true;
+                              if (firstPlayerWon || secondPlayerWon) {
+                                topText = firstPlayerWon
+                                    ? firstPlayerWinsText
+                                    : secondPlayerWinsText;
+                                gameOver = true;
 
-                              firstPlayerWon
-                                  ? ++numberOfFirstPlayerWins
-                                  : ++numberOfSecondPlayerWins;
+                                firstPlayerWon
+                                    ? ++numberOfFirstPlayerWins
+                                    : ++numberOfSecondPlayerWins;
 
-                              scoreText =
-                                  "$numberOfFirstPlayerWins : $numberOfSecondPlayerWins";
+                                scoreText = "$numberOfFirstPlayerWins :"
+                                    " $numberOfSecondPlayerWins";
 
-                              showMessage(scoreText);
-                            } else if (numberOfFirstPlayerTappedBlocks == 5 ||
-                                numberOfSecondPlayerTappedBlocks == 5) {
-                              topText = gameTieText;
-                              gameOver = true;
-                            } else {
-                              print(
-                                  "First player tapped: $numberOfFirstPlayerTappedBlocks");
-                              print(
-                                  "Second player tapped: $numberOfSecondPlayerTappedBlocks");
+                                showMessage(scoreText);
+                              } else if (numberOfFirstPlayerTappedBlocks == 5 ||
+                                  numberOfSecondPlayerTappedBlocks == 5) {
+                                topText = gameTieText;
+                                gameOver = true;
+                              } else {
+                                secondPlayerTurn = firstPlayerTurn;
+                                firstPlayerTurn = !firstPlayerTurn;
 
-                              secondPlayerTurn = firstPlayerTurn;
-                              firstPlayerTurn = !firstPlayerTurn;
-
-                              topText = firstPlayerTurn
-                                  ? firstPlayerTurnText
-                                  : secondPlayerTurnText;
+                                topText = firstPlayerTurn
+                                    ? firstPlayerTurnText
+                                    : secondPlayerTurnText;
+                              }
                             }
-                          }
-                        });
+                          },
+                        );
                       },
-                      child: Container(
+                      child: AnimatedContainer(
                         decoration: BoxDecoration(
-                          color: blockOneColor,
-                          border: Border.all(
-                            color: primaryColor,
-                            width: 5,
-                          ),
+                            color: blockOneColor,
+                            border: Border.all(
+                              color: primaryColor,
+                              width: 5,
+                            )),
+                        duration: Duration(
+                          milliseconds: 300,
                         ),
                       ),
                     ),
                     GestureDetector(
                       onTap: () {
-                        setState(() {
-                          if (blockTwoColor != firstPlayerColor &&
-                              blockTwoColor != secondPlayerColor &&
-                              !gameOver) {
-                            firstPlayerTurn
-                                ? blockTwoColor = firstPlayerColor
-                                : blockTwoColor = secondPlayerColor;
+                        setState(
+                          () {
+                            if (blockTwoColor != firstPlayerColor &&
+                                blockTwoColor != secondPlayerColor &&
+                                !gameOver) {
+                              firstPlayerTurn
+                                  ? blockTwoColor = firstPlayerColor
+                                  : blockTwoColor = secondPlayerColor;
 
-                            firstPlayerTurn
-                                ? ++numberOfFirstPlayerTappedBlocks
-                                : ++numberOfSecondPlayerTappedBlocks;
+                              firstPlayerTurn
+                                  ? ++numberOfFirstPlayerTappedBlocks
+                                  : ++numberOfSecondPlayerTappedBlocks;
 
-                            // checking if any player won
+                              // checking if any player won
 
-                            bool firstPlayerWon =
-                                checkIfPlayerWon(firstPlayerColor);
-                            bool secondPlayerWon =
-                                checkIfPlayerWon(secondPlayerColor);
+                              bool firstPlayerWon =
+                                  checkIfPlayerWon(firstPlayerColor);
+                              bool secondPlayerWon =
+                                  checkIfPlayerWon(secondPlayerColor);
 
-                            if (firstPlayerWon || secondPlayerWon) {
-                              topText = firstPlayerWon
-                                  ? firstPlayerWinsText
-                                  : secondPlayerWinsText;
-                              gameOver = true;
-                            } else if (numberOfFirstPlayerTappedBlocks == 5 ||
-                                numberOfSecondPlayerTappedBlocks == 5) {
-                              topText = gameTieText;
-                              gameOver = true;
+                              if (firstPlayerWon || secondPlayerWon) {
+                                topText = firstPlayerWon
+                                    ? firstPlayerWinsText
+                                    : secondPlayerWinsText;
+                                gameOver = true;
+                              } else if (numberOfFirstPlayerTappedBlocks == 5 ||
+                                  numberOfSecondPlayerTappedBlocks == 5) {
+                                topText = gameTieText;
+                                gameOver = true;
 
-                              firstPlayerWon
-                                  ? ++numberOfFirstPlayerWins
-                                  : ++numberOfSecondPlayerWins;
+                                firstPlayerWon
+                                    ? ++numberOfFirstPlayerWins
+                                    : ++numberOfSecondPlayerWins;
 
-                              scoreText =
-                                  "$numberOfFirstPlayerWins : $numberOfSecondPlayerWins";
+                                scoreText = "$numberOfFirstPlayerWins :"
+                                    " $numberOfSecondPlayerWins";
 
-                              showMessage(scoreText);
-                            } else {
-                              print(
-                                  "First player tapped: $numberOfFirstPlayerTappedBlocks");
-                              print(
-                                  "Second player tapped: $numberOfSecondPlayerTappedBlocks");
+                                showMessage(scoreText);
+                              } else {
+                                secondPlayerTurn = firstPlayerTurn;
+                                firstPlayerTurn = !firstPlayerTurn;
 
-                              secondPlayerTurn = firstPlayerTurn;
-                              firstPlayerTurn = !firstPlayerTurn;
-
-                              topText = firstPlayerTurn
-                                  ? firstPlayerTurnText
-                                  : secondPlayerTurnText;
+                                topText = firstPlayerTurn
+                                    ? firstPlayerTurnText
+                                    : secondPlayerTurnText;
+                              }
                             }
-                          }
-                        });
+                          },
+                        );
                       },
-                      child: Container(
+                      child: AnimatedContainer(
                         decoration: BoxDecoration(
                           color: blockTwoColor,
                           border: Border.all(
@@ -193,64 +189,64 @@ class _AppBodyState extends State<AppBody> {
                             width: 5,
                           ),
                         ),
+                        duration: Duration(
+                          milliseconds: 300,
+                        ),
                       ),
                     ),
                     GestureDetector(
                       onTap: () {
-                        setState(() {
-                          if (blockThreeColor != firstPlayerColor &&
-                              blockThreeColor != secondPlayerColor &&
-                              !gameOver) {
-                            firstPlayerTurn
-                                ? blockThreeColor = firstPlayerColor
-                                : blockThreeColor = secondPlayerColor;
+                        setState(
+                          () {
+                            if (blockThreeColor != firstPlayerColor &&
+                                blockThreeColor != secondPlayerColor &&
+                                !gameOver) {
+                              firstPlayerTurn
+                                  ? blockThreeColor = firstPlayerColor
+                                  : blockThreeColor = secondPlayerColor;
 
-                            firstPlayerTurn
-                                ? ++numberOfFirstPlayerTappedBlocks
-                                : ++numberOfSecondPlayerTappedBlocks;
+                              firstPlayerTurn
+                                  ? ++numberOfFirstPlayerTappedBlocks
+                                  : ++numberOfSecondPlayerTappedBlocks;
 
-                            // checking if any player won
+                              // checking if any player won
 
-                            bool firstPlayerWon =
-                                checkIfPlayerWon(firstPlayerColor);
-                            bool secondPlayerWon =
-                                checkIfPlayerWon(secondPlayerColor);
+                              bool firstPlayerWon =
+                                  checkIfPlayerWon(firstPlayerColor);
+                              bool secondPlayerWon =
+                                  checkIfPlayerWon(secondPlayerColor);
 
-                            if (firstPlayerWon || secondPlayerWon) {
-                              topText = firstPlayerWon
-                                  ? firstPlayerWinsText
-                                  : secondPlayerWinsText;
-                              gameOver = true;
+                              if (firstPlayerWon || secondPlayerWon) {
+                                topText = firstPlayerWon
+                                    ? firstPlayerWinsText
+                                    : secondPlayerWinsText;
+                                gameOver = true;
 
-                              firstPlayerWon
-                                  ? ++numberOfFirstPlayerWins
-                                  : ++numberOfSecondPlayerWins;
+                                firstPlayerWon
+                                    ? ++numberOfFirstPlayerWins
+                                    : ++numberOfSecondPlayerWins;
 
-                              scoreText =
-                                  "$numberOfFirstPlayerWins : $numberOfSecondPlayerWins";
+                                scoreText = "$numberOfFirstPlayerWins :"
+                                    " $numberOfSecondPlayerWins";
 
-                              showMessage(scoreText);
-                            } else if (numberOfFirstPlayerTappedBlocks == 5 ||
-                                numberOfSecondPlayerTappedBlocks == 5) {
-                              topText = gameTieText;
-                              gameOver = true;
-                            } else {
-                              print(
-                                  "First player tapped: $numberOfFirstPlayerTappedBlocks");
-                              print(
-                                  "Second player tapped: $numberOfSecondPlayerTappedBlocks");
+                                showMessage(scoreText);
+                              } else if (numberOfFirstPlayerTappedBlocks == 5 ||
+                                  numberOfSecondPlayerTappedBlocks == 5) {
+                                topText = gameTieText;
+                                gameOver = true;
+                              } else {
+                                secondPlayerTurn = firstPlayerTurn;
+                                firstPlayerTurn = !firstPlayerTurn;
 
-                              secondPlayerTurn = firstPlayerTurn;
-                              firstPlayerTurn = !firstPlayerTurn;
-
-                              topText = firstPlayerTurn
-                                  ? firstPlayerTurnText
-                                  : secondPlayerTurnText;
+                                topText = firstPlayerTurn
+                                    ? firstPlayerTurnText
+                                    : secondPlayerTurnText;
+                              }
                             }
-                          }
-                        });
+                          },
+                        );
                       },
-                      child: Container(
+                      child: AnimatedContainer(
                         decoration: BoxDecoration(
                           color: blockThreeColor,
                           border: Border.all(
@@ -258,64 +254,64 @@ class _AppBodyState extends State<AppBody> {
                             width: 5,
                           ),
                         ),
+                        duration: Duration(
+                          milliseconds: 300,
+                        ),
                       ),
                     ),
                     GestureDetector(
                       onTap: () {
-                        setState(() {
-                          if (blockFourColor != firstPlayerColor &&
-                              blockFourColor != secondPlayerColor &&
-                              !gameOver) {
-                            firstPlayerTurn
-                                ? blockFourColor = firstPlayerColor
-                                : blockFourColor = secondPlayerColor;
+                        setState(
+                          () {
+                            if (blockFourColor != firstPlayerColor &&
+                                blockFourColor != secondPlayerColor &&
+                                !gameOver) {
+                              firstPlayerTurn
+                                  ? blockFourColor = firstPlayerColor
+                                  : blockFourColor = secondPlayerColor;
 
-                            firstPlayerTurn
-                                ? ++numberOfFirstPlayerTappedBlocks
-                                : ++numberOfSecondPlayerTappedBlocks;
+                              firstPlayerTurn
+                                  ? ++numberOfFirstPlayerTappedBlocks
+                                  : ++numberOfSecondPlayerTappedBlocks;
 
-                            // checking if any player won
+                              // checking if any player won
 
-                            bool firstPlayerWon =
-                                checkIfPlayerWon(firstPlayerColor);
-                            bool secondPlayerWon =
-                                checkIfPlayerWon(secondPlayerColor);
+                              bool firstPlayerWon =
+                                  checkIfPlayerWon(firstPlayerColor);
+                              bool secondPlayerWon =
+                                  checkIfPlayerWon(secondPlayerColor);
 
-                            if (firstPlayerWon || secondPlayerWon) {
-                              topText = firstPlayerWon
-                                  ? firstPlayerWinsText
-                                  : secondPlayerWinsText;
-                              gameOver = true;
+                              if (firstPlayerWon || secondPlayerWon) {
+                                topText = firstPlayerWon
+                                    ? firstPlayerWinsText
+                                    : secondPlayerWinsText;
+                                gameOver = true;
 
-                              firstPlayerWon
-                                  ? ++numberOfFirstPlayerWins
-                                  : ++numberOfSecondPlayerWins;
+                                firstPlayerWon
+                                    ? ++numberOfFirstPlayerWins
+                                    : ++numberOfSecondPlayerWins;
 
-                              scoreText =
-                                  "$numberOfFirstPlayerWins : $numberOfSecondPlayerWins";
+                                scoreText = "$numberOfFirstPlayerWins :"
+                                    " $numberOfSecondPlayerWins";
 
-                              showMessage(scoreText);
-                            } else if (numberOfFirstPlayerTappedBlocks == 5 ||
-                                numberOfSecondPlayerTappedBlocks == 5) {
-                              topText = gameTieText;
-                              gameOver = true;
-                            } else {
-                              print(
-                                  "First player tapped: $numberOfFirstPlayerTappedBlocks");
-                              print(
-                                  "Second player tapped: $numberOfSecondPlayerTappedBlocks");
+                                showMessage(scoreText);
+                              } else if (numberOfFirstPlayerTappedBlocks == 5 ||
+                                  numberOfSecondPlayerTappedBlocks == 5) {
+                                topText = gameTieText;
+                                gameOver = true;
+                              } else {
+                                secondPlayerTurn = firstPlayerTurn;
+                                firstPlayerTurn = !firstPlayerTurn;
 
-                              secondPlayerTurn = firstPlayerTurn;
-                              firstPlayerTurn = !firstPlayerTurn;
-
-                              topText = firstPlayerTurn
-                                  ? firstPlayerTurnText
-                                  : secondPlayerTurnText;
+                                topText = firstPlayerTurn
+                                    ? firstPlayerTurnText
+                                    : secondPlayerTurnText;
+                              }
                             }
-                          }
-                        });
+                          },
+                        );
                       },
-                      child: Container(
+                      child: AnimatedContainer(
                         decoration: BoxDecoration(
                           color: blockFourColor,
                           border: Border.all(
@@ -323,64 +319,64 @@ class _AppBodyState extends State<AppBody> {
                             width: 5,
                           ),
                         ),
+                        duration: Duration(
+                          milliseconds: 300,
+                        ),
                       ),
                     ),
                     GestureDetector(
                       onTap: () {
-                        setState(() {
-                          if (blockFiveColor != firstPlayerColor &&
-                              blockFiveColor != secondPlayerColor &&
-                              !gameOver) {
-                            firstPlayerTurn
-                                ? blockFiveColor = firstPlayerColor
-                                : blockFiveColor = secondPlayerColor;
+                        setState(
+                          () {
+                            if (blockFiveColor != firstPlayerColor &&
+                                blockFiveColor != secondPlayerColor &&
+                                !gameOver) {
+                              firstPlayerTurn
+                                  ? blockFiveColor = firstPlayerColor
+                                  : blockFiveColor = secondPlayerColor;
 
-                            firstPlayerTurn
-                                ? ++numberOfFirstPlayerTappedBlocks
-                                : ++numberOfSecondPlayerTappedBlocks;
+                              firstPlayerTurn
+                                  ? ++numberOfFirstPlayerTappedBlocks
+                                  : ++numberOfSecondPlayerTappedBlocks;
 
-                            // checking if any player won
+                              // checking if any player won
 
-                            bool firstPlayerWon =
-                                checkIfPlayerWon(firstPlayerColor);
-                            bool secondPlayerWon =
-                                checkIfPlayerWon(secondPlayerColor);
+                              bool firstPlayerWon =
+                                  checkIfPlayerWon(firstPlayerColor);
+                              bool secondPlayerWon =
+                                  checkIfPlayerWon(secondPlayerColor);
 
-                            if (firstPlayerWon || secondPlayerWon) {
-                              topText = firstPlayerWon
-                                  ? firstPlayerWinsText
-                                  : secondPlayerWinsText;
-                              gameOver = true;
+                              if (firstPlayerWon || secondPlayerWon) {
+                                topText = firstPlayerWon
+                                    ? firstPlayerWinsText
+                                    : secondPlayerWinsText;
+                                gameOver = true;
 
-                              firstPlayerWon
-                                  ? ++numberOfFirstPlayerWins
-                                  : ++numberOfSecondPlayerWins;
+                                firstPlayerWon
+                                    ? ++numberOfFirstPlayerWins
+                                    : ++numberOfSecondPlayerWins;
 
-                              scoreText =
-                                  "$numberOfFirstPlayerWins : $numberOfSecondPlayerWins";
+                                scoreText = "$numberOfFirstPlayerWins :"
+                                    " $numberOfSecondPlayerWins";
 
-                              showMessage(scoreText);
-                            } else if (numberOfFirstPlayerTappedBlocks == 5 ||
-                                numberOfSecondPlayerTappedBlocks == 5) {
-                              topText = gameTieText;
-                              gameOver = true;
-                            } else {
-                              print(
-                                  "First player tapped: $numberOfFirstPlayerTappedBlocks");
-                              print(
-                                  "Second player tapped: $numberOfSecondPlayerTappedBlocks");
+                                showMessage(scoreText);
+                              } else if (numberOfFirstPlayerTappedBlocks == 5 ||
+                                  numberOfSecondPlayerTappedBlocks == 5) {
+                                topText = gameTieText;
+                                gameOver = true;
+                              } else {
+                                secondPlayerTurn = firstPlayerTurn;
+                                firstPlayerTurn = !firstPlayerTurn;
 
-                              secondPlayerTurn = firstPlayerTurn;
-                              firstPlayerTurn = !firstPlayerTurn;
-
-                              topText = firstPlayerTurn
-                                  ? firstPlayerTurnText
-                                  : secondPlayerTurnText;
+                                topText = firstPlayerTurn
+                                    ? firstPlayerTurnText
+                                    : secondPlayerTurnText;
+                              }
                             }
-                          }
-                        });
+                          },
+                        );
                       },
-                      child: Container(
+                      child: AnimatedContainer(
                         decoration: BoxDecoration(
                           color: blockFiveColor,
                           border: Border.all(
@@ -388,64 +384,64 @@ class _AppBodyState extends State<AppBody> {
                             width: 5,
                           ),
                         ),
+                        duration: Duration(
+                          milliseconds: 300,
+                        ),
                       ),
                     ),
                     GestureDetector(
                       onTap: () {
-                        setState(() {
-                          if (blockSixColor != firstPlayerColor &&
-                              blockSixColor != secondPlayerColor &&
-                              !gameOver) {
-                            firstPlayerTurn
-                                ? blockSixColor = firstPlayerColor
-                                : blockSixColor = secondPlayerColor;
+                        setState(
+                          () {
+                            if (blockSixColor != firstPlayerColor &&
+                                blockSixColor != secondPlayerColor &&
+                                !gameOver) {
+                              firstPlayerTurn
+                                  ? blockSixColor = firstPlayerColor
+                                  : blockSixColor = secondPlayerColor;
 
-                            firstPlayerTurn
-                                ? ++numberOfFirstPlayerTappedBlocks
-                                : ++numberOfSecondPlayerTappedBlocks;
+                              firstPlayerTurn
+                                  ? ++numberOfFirstPlayerTappedBlocks
+                                  : ++numberOfSecondPlayerTappedBlocks;
 
-                            // checking if any player won
+                              // checking if any player won
 
-                            bool firstPlayerWon =
-                                checkIfPlayerWon(firstPlayerColor);
-                            bool secondPlayerWon =
-                                checkIfPlayerWon(secondPlayerColor);
+                              bool firstPlayerWon =
+                                  checkIfPlayerWon(firstPlayerColor);
+                              bool secondPlayerWon =
+                                  checkIfPlayerWon(secondPlayerColor);
 
-                            if (firstPlayerWon || secondPlayerWon) {
-                              topText = firstPlayerWon
-                                  ? firstPlayerWinsText
-                                  : secondPlayerWinsText;
-                              gameOver = true;
+                              if (firstPlayerWon || secondPlayerWon) {
+                                topText = firstPlayerWon
+                                    ? firstPlayerWinsText
+                                    : secondPlayerWinsText;
+                                gameOver = true;
 
-                              firstPlayerWon
-                                  ? ++numberOfFirstPlayerWins
-                                  : ++numberOfSecondPlayerWins;
+                                firstPlayerWon
+                                    ? ++numberOfFirstPlayerWins
+                                    : ++numberOfSecondPlayerWins;
 
-                              scoreText =
-                                  "$numberOfFirstPlayerWins : $numberOfSecondPlayerWins";
+                                scoreText = "$numberOfFirstPlayerWins :"
+                                    " $numberOfSecondPlayerWins";
 
-                              showMessage(scoreText);
-                            } else if (numberOfFirstPlayerTappedBlocks == 5 ||
-                                numberOfSecondPlayerTappedBlocks == 5) {
-                              topText = gameTieText;
-                              gameOver = true;
-                            } else {
-                              print(
-                                  "First player tapped: $numberOfFirstPlayerTappedBlocks");
-                              print(
-                                  "Second player tapped: $numberOfSecondPlayerTappedBlocks");
+                                showMessage(scoreText);
+                              } else if (numberOfFirstPlayerTappedBlocks == 5 ||
+                                  numberOfSecondPlayerTappedBlocks == 5) {
+                                topText = gameTieText;
+                                gameOver = true;
+                              } else {
+                                secondPlayerTurn = firstPlayerTurn;
+                                firstPlayerTurn = !firstPlayerTurn;
 
-                              secondPlayerTurn = firstPlayerTurn;
-                              firstPlayerTurn = !firstPlayerTurn;
-
-                              topText = firstPlayerTurn
-                                  ? firstPlayerTurnText
-                                  : secondPlayerTurnText;
+                                topText = firstPlayerTurn
+                                    ? firstPlayerTurnText
+                                    : secondPlayerTurnText;
+                              }
                             }
-                          }
-                        });
+                          },
+                        );
                       },
-                      child: Container(
+                      child: AnimatedContainer(
                         decoration: BoxDecoration(
                           color: blockSixColor,
                           border: Border.all(
@@ -453,64 +449,64 @@ class _AppBodyState extends State<AppBody> {
                             width: 5,
                           ),
                         ),
+                        duration: Duration(
+                          milliseconds: 300,
+                        ),
                       ),
                     ),
                     GestureDetector(
                       onTap: () {
-                        setState(() {
-                          if (blockSevenColor != firstPlayerColor &&
-                              blockSevenColor != secondPlayerColor &&
-                              !gameOver) {
-                            firstPlayerTurn
-                                ? blockSevenColor = firstPlayerColor
-                                : blockSevenColor = secondPlayerColor;
+                        setState(
+                          () {
+                            if (blockSevenColor != firstPlayerColor &&
+                                blockSevenColor != secondPlayerColor &&
+                                !gameOver) {
+                              firstPlayerTurn
+                                  ? blockSevenColor = firstPlayerColor
+                                  : blockSevenColor = secondPlayerColor;
 
-                            firstPlayerTurn
-                                ? ++numberOfFirstPlayerTappedBlocks
-                                : ++numberOfSecondPlayerTappedBlocks;
+                              firstPlayerTurn
+                                  ? ++numberOfFirstPlayerTappedBlocks
+                                  : ++numberOfSecondPlayerTappedBlocks;
 
-                            // checking if any player won
+                              // checking if any player won
 
-                            bool firstPlayerWon =
-                                checkIfPlayerWon(firstPlayerColor);
-                            bool secondPlayerWon =
-                                checkIfPlayerWon(secondPlayerColor);
+                              bool firstPlayerWon =
+                                  checkIfPlayerWon(firstPlayerColor);
+                              bool secondPlayerWon =
+                                  checkIfPlayerWon(secondPlayerColor);
 
-                            if (firstPlayerWon || secondPlayerWon) {
-                              topText = firstPlayerWon
-                                  ? firstPlayerWinsText
-                                  : secondPlayerWinsText;
-                              gameOver = true;
+                              if (firstPlayerWon || secondPlayerWon) {
+                                topText = firstPlayerWon
+                                    ? firstPlayerWinsText
+                                    : secondPlayerWinsText;
+                                gameOver = true;
 
-                              firstPlayerWon
-                                  ? ++numberOfFirstPlayerWins
-                                  : ++numberOfSecondPlayerWins;
+                                firstPlayerWon
+                                    ? ++numberOfFirstPlayerWins
+                                    : ++numberOfSecondPlayerWins;
 
-                              scoreText =
-                                  "$numberOfFirstPlayerWins : $numberOfSecondPlayerWins";
+                                scoreText = "$numberOfFirstPlayerWins :"
+                                    " $numberOfSecondPlayerWins";
 
-                              showMessage(scoreText);
-                            } else if (numberOfFirstPlayerTappedBlocks == 5 ||
-                                numberOfSecondPlayerTappedBlocks == 5) {
-                              topText = gameTieText;
-                              gameOver = true;
-                            } else {
-                              print(
-                                  "First player tapped: $numberOfFirstPlayerTappedBlocks");
-                              print(
-                                  "Second player tapped: $numberOfSecondPlayerTappedBlocks");
+                                showMessage(scoreText);
+                              } else if (numberOfFirstPlayerTappedBlocks == 5 ||
+                                  numberOfSecondPlayerTappedBlocks == 5) {
+                                topText = gameTieText;
+                                gameOver = true;
+                              } else {
+                                secondPlayerTurn = firstPlayerTurn;
+                                firstPlayerTurn = !firstPlayerTurn;
 
-                              secondPlayerTurn = firstPlayerTurn;
-                              firstPlayerTurn = !firstPlayerTurn;
-
-                              topText = firstPlayerTurn
-                                  ? firstPlayerTurnText
-                                  : secondPlayerTurnText;
+                                topText = firstPlayerTurn
+                                    ? firstPlayerTurnText
+                                    : secondPlayerTurnText;
+                              }
                             }
-                          }
-                        });
+                          },
+                        );
                       },
-                      child: Container(
+                      child: AnimatedContainer(
                         decoration: BoxDecoration(
                           color: blockSevenColor,
                           border: Border.all(
@@ -518,64 +514,64 @@ class _AppBodyState extends State<AppBody> {
                             width: 5,
                           ),
                         ),
+                        duration: Duration(
+                          milliseconds: 300,
+                        ),
                       ),
                     ),
                     GestureDetector(
                       onTap: () {
-                        setState(() {
-                          if (blockEightColor != firstPlayerColor &&
-                              blockEightColor != secondPlayerColor &&
-                              !gameOver) {
-                            firstPlayerTurn
-                                ? blockEightColor = firstPlayerColor
-                                : blockEightColor = secondPlayerColor;
+                        setState(
+                          () {
+                            if (blockEightColor != firstPlayerColor &&
+                                blockEightColor != secondPlayerColor &&
+                                !gameOver) {
+                              firstPlayerTurn
+                                  ? blockEightColor = firstPlayerColor
+                                  : blockEightColor = secondPlayerColor;
 
-                            firstPlayerTurn
-                                ? ++numberOfFirstPlayerTappedBlocks
-                                : ++numberOfSecondPlayerTappedBlocks;
+                              firstPlayerTurn
+                                  ? ++numberOfFirstPlayerTappedBlocks
+                                  : ++numberOfSecondPlayerTappedBlocks;
 
-                            // checking if any player won
+                              // checking if any player won
 
-                            bool firstPlayerWon =
-                                checkIfPlayerWon(firstPlayerColor);
-                            bool secondPlayerWon =
-                                checkIfPlayerWon(secondPlayerColor);
+                              bool firstPlayerWon =
+                                  checkIfPlayerWon(firstPlayerColor);
+                              bool secondPlayerWon =
+                                  checkIfPlayerWon(secondPlayerColor);
 
-                            if (firstPlayerWon || secondPlayerWon) {
-                              topText = firstPlayerWon
-                                  ? firstPlayerWinsText
-                                  : secondPlayerWinsText;
-                              gameOver = true;
+                              if (firstPlayerWon || secondPlayerWon) {
+                                topText = firstPlayerWon
+                                    ? firstPlayerWinsText
+                                    : secondPlayerWinsText;
+                                gameOver = true;
 
-                              firstPlayerWon
-                                  ? ++numberOfFirstPlayerWins
-                                  : ++numberOfSecondPlayerWins;
+                                firstPlayerWon
+                                    ? ++numberOfFirstPlayerWins
+                                    : ++numberOfSecondPlayerWins;
 
-                              scoreText =
-                                  "$numberOfFirstPlayerWins : $numberOfSecondPlayerWins";
+                                scoreText = "$numberOfFirstPlayerWins :"
+                                    " $numberOfSecondPlayerWins";
 
-                              showMessage(scoreText);
-                            } else if (numberOfFirstPlayerTappedBlocks == 5 ||
-                                numberOfSecondPlayerTappedBlocks == 5) {
-                              topText = gameTieText;
-                              gameOver = true;
-                            } else {
-                              print(
-                                  "First player tapped: $numberOfFirstPlayerTappedBlocks");
-                              print(
-                                  "Second player tapped: $numberOfSecondPlayerTappedBlocks");
+                                showMessage(scoreText);
+                              } else if (numberOfFirstPlayerTappedBlocks == 5 ||
+                                  numberOfSecondPlayerTappedBlocks == 5) {
+                                topText = gameTieText;
+                                gameOver = true;
+                              } else {
+                                secondPlayerTurn = firstPlayerTurn;
+                                firstPlayerTurn = !firstPlayerTurn;
 
-                              secondPlayerTurn = firstPlayerTurn;
-                              firstPlayerTurn = !firstPlayerTurn;
-
-                              topText = firstPlayerTurn
-                                  ? firstPlayerTurnText
-                                  : secondPlayerTurnText;
+                                topText = firstPlayerTurn
+                                    ? firstPlayerTurnText
+                                    : secondPlayerTurnText;
+                              }
                             }
-                          }
-                        });
+                          },
+                        );
                       },
-                      child: Container(
+                      child: AnimatedContainer(
                         decoration: BoxDecoration(
                           color: blockEightColor,
                           border: Border.all(
@@ -583,70 +579,73 @@ class _AppBodyState extends State<AppBody> {
                             width: 5,
                           ),
                         ),
+                        duration: Duration(
+                          milliseconds: 300,
+                        ),
                       ),
                     ),
                     GestureDetector(
                       onTap: () {
-                        setState(() {
-                          if (blockNineColor != firstPlayerColor &&
-                              blockNineColor != secondPlayerColor &&
-                              !gameOver) {
-                            firstPlayerTurn
-                                ? blockNineColor = firstPlayerColor
-                                : blockNineColor = secondPlayerColor;
+                        setState(
+                          () {
+                            if (blockNineColor != firstPlayerColor &&
+                                blockNineColor != secondPlayerColor &&
+                                !gameOver) {
+                              firstPlayerTurn
+                                  ? blockNineColor = firstPlayerColor
+                                  : blockNineColor = secondPlayerColor;
 
-                            firstPlayerTurn
-                                ? ++numberOfFirstPlayerTappedBlocks
-                                : ++numberOfSecondPlayerTappedBlocks;
+                              firstPlayerTurn
+                                  ? ++numberOfFirstPlayerTappedBlocks
+                                  : ++numberOfSecondPlayerTappedBlocks;
 
-                            // checking if any player won
+                              // checking if any player won
 
-                            bool firstPlayerWon =
-                                checkIfPlayerWon(firstPlayerColor);
-                            bool secondPlayerWon =
-                                checkIfPlayerWon(secondPlayerColor);
+                              bool firstPlayerWon =
+                                  checkIfPlayerWon(firstPlayerColor);
+                              bool secondPlayerWon =
+                                  checkIfPlayerWon(secondPlayerColor);
 
-                            if (firstPlayerWon || secondPlayerWon) {
-                              topText = firstPlayerWon
-                                  ? firstPlayerWinsText
-                                  : secondPlayerWinsText;
-                              gameOver = true;
+                              if (firstPlayerWon || secondPlayerWon) {
+                                topText = firstPlayerWon
+                                    ? firstPlayerWinsText
+                                    : secondPlayerWinsText;
+                                gameOver = true;
 
-                              firstPlayerWon
-                                  ? ++numberOfFirstPlayerWins
-                                  : ++numberOfSecondPlayerWins;
+                                firstPlayerWon
+                                    ? ++numberOfFirstPlayerWins
+                                    : ++numberOfSecondPlayerWins;
 
-                              scoreText =
-                                  "$numberOfFirstPlayerWins : $numberOfSecondPlayerWins";
+                                scoreText = "$numberOfFirstPlayerWins :"
+                                    " $numberOfSecondPlayerWins";
 
-                              showMessage(scoreText);
-                            } else if (numberOfFirstPlayerTappedBlocks == 5 ||
-                                numberOfSecondPlayerTappedBlocks == 5) {
-                              topText = gameTieText;
-                              gameOver = true;
-                            } else {
-                              print(
-                                  "First player tapped: $numberOfFirstPlayerTappedBlocks");
-                              print(
-                                  "Second player tapped: $numberOfSecondPlayerTappedBlocks");
+                                showMessage(scoreText);
+                              } else if (numberOfFirstPlayerTappedBlocks == 5 ||
+                                  numberOfSecondPlayerTappedBlocks == 5) {
+                                topText = gameTieText;
+                                gameOver = true;
+                              } else {
+                                secondPlayerTurn = firstPlayerTurn;
+                                firstPlayerTurn = !firstPlayerTurn;
 
-                              secondPlayerTurn = firstPlayerTurn;
-                              firstPlayerTurn = !firstPlayerTurn;
-
-                              topText = firstPlayerTurn
-                                  ? firstPlayerTurnText
-                                  : secondPlayerTurnText;
+                                topText = firstPlayerTurn
+                                    ? firstPlayerTurnText
+                                    : secondPlayerTurnText;
+                              }
                             }
-                          }
-                        });
+                          },
+                        );
                       },
-                      child: Container(
+                      child: AnimatedContainer(
                         decoration: BoxDecoration(
                           color: blockNineColor,
                           border: Border.all(
                             color: primaryColor,
                             width: 5,
                           ),
+                        ),
+                        duration: Duration(
+                          milliseconds: 300,
                         ),
                       ),
                     ),
@@ -656,9 +655,11 @@ class _AppBodyState extends State<AppBody> {
               if (gameOver)
                 OutlinedButton(
                   onPressed: () {
-                    setState(() {
-                      restartGame();
-                    });
+                    setState(
+                      () {
+                        restartGame();
+                      },
+                    );
                   },
                   style: OutlinedButton.styleFrom(
                     side: BorderSide(

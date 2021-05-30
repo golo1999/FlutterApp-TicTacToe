@@ -111,5 +111,6 @@ void restartGame() {
 void showMessage(String text) {
   Fluttertoast.showToast(
     msg: text,
+    toastLength: Toast.LENGTH_LONG,
   );
 }
